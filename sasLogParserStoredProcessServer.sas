@@ -72,6 +72,11 @@ run;
 ods noresults;
 %include "&sasLogParser.includeCode.sas";
 
+/* Start: Create Reports */
+proc sort data=work.logs;
+   by descending realtime;
+run;
+
 data logs;
    set logs;
    where
