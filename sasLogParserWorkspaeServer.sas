@@ -114,7 +114,7 @@ data seconds;
    cpuTimeTotalSeconds = cpuTimeSeconds + (cpuTimeMinutes * 60) + (cpuTimeHours * 3600);
    proc = scan(step,3);
 run;
-*/
+/*
 ods excel file="&sasLogParser.reports&delm.totalSeconds.xlsx" ;
 proc print data=seconds;
    var step realtime cputime  totaltime totalcpu fileName  
