@@ -1,0 +1,56 @@
+/*
+Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+SPDX-License-Identifier: Apache-2.0
+*/
+/* cas casauto terminate; */
+cas;
+caslib _all_ assign;
+
+%macro compressLoad(path,dataset,path2,caslib,table);
+proc cas;
+   file log;
+   table.dropCaslib /
+   caslib='sas7bdat' quiet = true;
+run;
+   table.dropCaslib /
+   caslib='sashdat' quiet = true;
+run;
+  addcaslib /
+    datasource={srctype="path"}
+    name="sas7bdat"
+    path="&path" ; 
+ run;
+  addcaslib /
+    datasource={srctype="path"}
+    name="sashdat"
+    path="&path2" 
+    session=false; 
+ run;
+quit;
+proc casutil;
+    DROPTABLE CASDATA="&table" INCASLIB="sashdat" QUIET;
+run;
+proc cas;
+  index /
+    table={caslib="sas7bdat" name="&dataset..sas7bdat" singlepass=true}
+    casout={caslib="&caslib" name="&table" blockSize=536870912 compress=true replication=0} ;
+ run;
+  print _status ; 
+ run;
+  tabledetails /
+    caslib="&caslib"
+    name="&table" ; 
+ run;
+   table.save / caslib="&caslib" 
+   table={name="&table", caslib="&caslib"},
+   name="&table..sashdat"
+   replace=True;
+ run;
+quit;
+proc casutil outcaslib="sashdat";                     
+   promote casdata="testCompress";
+quit;
+%mend;
+/* options mprint; */
+%compressLoad(path=/viyafiles/sasss1/data,dataset=baseball,path2=/viyafiles/sasss1/data/sashdat,caslib=sashdat,table=testCompress);
+ 
