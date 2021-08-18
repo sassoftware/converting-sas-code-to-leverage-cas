@@ -10,7 +10,18 @@ or use the following code which will add the format to the search path.
 
 cas;
 caslib _all_ assign;
- 
+
+proc format casfmtlib="casformats";
+   value dow
+      1 = 'Sunday'
+      2 = 'Monday'
+      3 = 'Tuesday'
+      4 = 'Wednesday'
+      5 = 'Thursday'
+      6 = 'Friday'
+      7 = 'Saturday';
+run;
+
 proc cas; 
    accessControl.assumeRole / adminRole="SuperUser"; run;      
    configuration.setServOpt / fmtsearch = 'sassuppliedformats casformats';        
