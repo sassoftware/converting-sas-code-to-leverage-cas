@@ -159,7 +159,7 @@
 - Requires SAS Viya 3.5+. 
 - PROC SORT NODUPKEY and NOUNIKEY on CAS table examples. 
 
-**SASEnterpriseSessionMonitorScheduledJobPosgres2CAS**
+**SASEnterpriseSessionMonitorScheduledJobPostgres2CAS**
 - SPRE
 - Loads the data collected by the SAS Enterprise Session Monitor into CAS
 - Schedule this job to run on a daily basis
