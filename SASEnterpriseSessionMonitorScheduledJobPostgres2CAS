@@ -4,7 +4,7 @@ SPDX-License-Identifier: Apache-2.0
 */
 /* SAS Enterprise Session Monitor */
 /* Schedule this code to run every day */
-/* Reads the agent data in postgres and loads it into CAS */
+/* Reads the agent data in Postgres and loads it into CAS */
 /* For this code to work create a global CASLIB called ESM */
 
 %let timezone = 'UTC';
