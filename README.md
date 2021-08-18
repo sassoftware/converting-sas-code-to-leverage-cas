@@ -52,13 +52,13 @@
 - Note: CAS Controller must have access to the path used by SASWORK.
 - [How to create a PATH based CASLIB to SASWORK](https://blogs.sas.com/content/sgf/2020/07/21/how-to-create-a-path-based-caslib-to-saswork-for-speedier-analysis-with-sas-viya/).
 
-**DATA Step LAG and DIF.sas**
+**DATAStepLAGandDIF.sas**
 - Compute Server (SPRE) enabled.
 
-**DATA Step Multiple Output Tables.sas**
+**DATAStepMultipleOutputTables.sas**
 - CAS enabled.
 
-**DATA Step RETAIN.sas**
+**DATAStepRETAIN.sas**
 - CAS enabled.
 - Requires FIRST. processing where one initials all RETAIN variables.
 
