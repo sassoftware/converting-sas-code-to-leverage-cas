@@ -11,6 +11,9 @@ or use the following code which will add the format to the search path.
 cas;
 caslib _all_ assign;
 
+/* set the active CASLIB that you want the formats written to */
+options caslib="public";
+
 proc format casfmtlib="casformats";
    value dow
       1 = 'Sunday'
@@ -21,6 +24,14 @@ proc format casfmtlib="casformats";
       6 = 'Friday'
       7 = 'Saturday';
 run;
+
+/* Save format so they can be used between CAS sessions */
+cas casauto savefmtlib fmtlibname=casformats table=dow replace;
+
+cas casauto promotefmtlib fmtlibname='casformats' replace;
+
+/* list user defined format defined to CAS */
+cas casauto listfmtranges fmtname=dow;
 
 proc cas; 
    accessControl.assumeRole / adminRole="SuperUser"; run;      
