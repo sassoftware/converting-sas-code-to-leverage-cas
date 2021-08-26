@@ -9,7 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 
 %let timezone = 'UTC';
  
-libname pgesm postgres server='rn000035482' port=15432 user=esm password=esm database=esm;
+libname pgesm postgres server='servername' port=15432 user=esm password=esm database=esm;
 cas;
 
 /* Only run this code once to create the global CASLIB ESM */
