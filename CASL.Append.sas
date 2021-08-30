@@ -4,6 +4,7 @@ SPDX-License-Identifier: Apache-2.0
 */
 /* cas casauto terminate; */
 cas;
+/* bind CASLIB to SAS client */
 caslib _all_ assign;
 
 data casuser.baseball_location;
