@@ -17,3 +17,9 @@ libname sas7bdat "&datapath";
 proc copy in=sashelp out=sas7bdat;
    select baseball cars;
 run;
+
+proc contents data=sas7bdat.baseball;
+run;
+
+proc contents data=sas7bdat.cars;
+run;
