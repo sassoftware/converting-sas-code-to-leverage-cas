@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 /* CAS Enabled */
 /* How to Parallel Load and Compress a CAS Table */
 /* cas casauto terminate; */
-cas sessopts=(METRICS=TRUE);
+cas casauto sessopts=(METRICS=TRUE);
 /* LIBNAME using the CAS engine */
 libname CASWORK cas caslib=casuser;
 /* Changing the default location of all one level named tables */
@@ -19,14 +19,14 @@ caslib _all_ assign;
 options msglevel=i;
 /* BLOCKSIZE=536870912 (523MB) is required for large CAS tables */
 /* This option will reduce the number of open files that is used to load the CAS table */
+
+%let datapath=/path/to/sas7bdat;
+
 proc cas;
    file log;
    table.dropCaslib /
    caslib='sas7bdat' quiet = true;
- run;
-   table.dropCaslib /
-   caslib='sashdat' quiet = true;
- run;
+run;
   addcaslib /
     datasource={srctype="path"}
     name="sas7bdat"
