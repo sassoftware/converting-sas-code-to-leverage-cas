@@ -10,14 +10,12 @@ SPDX-License-Identifier: Apache-2.0
 %let timezone = 'UTC';
 
 libname pgesm postgres server='dsn' port=15432 user=userid password=userid database=esm;
-
 cas;
 caslib _all_ assign;
 
 PROC DELETE data=esm._all_;
 run;
 
-/* Day of Week user defined format */
 proc format casfmtlib="casformats";
               value dow
               1 = 'Sunday'
@@ -33,8 +31,8 @@ cas casauto savefmtlib fmtlibname=casformats table=dow replace;
 cas casauto promotefmtlib fmtlibname='casformats' replace;
 cas casauto listfmtranges fmtname=dow;
 
+
 data esm_jobs;
-              
               set pgesm.esm_job;
               from_date = tzoneu2s(from_date, &timezone.);
               to_date = tzoneu2s(to_date, &timezone.);
@@ -84,9 +82,10 @@ proc sql;
               ;
 quit;
 
-data esm.esm_jobs(replace=yes compress=yes copies=0 promote=yes compress=yes copies=0 promote=yes);
+data esm.esm_jobs(compress=yes copies=0 promote=yes);
               set esm_jobs_nodes;
 run;
+
 
 proc sql;
               create table tempflows as
@@ -96,12 +95,14 @@ proc sql;
                                            select flow, subflow, subsubflow, datepart(from_date) format=date. as day, min(from_date) format=datetime20. as from_date, max(to_date) format=datetime20. as to_date
                                            from esm_jobs
                                            group by flow, subflow, subsubflow, day
+
                              )
                              group by flow, subflow, subsubflow, day
               ;
+
 quit;
 
-/* data esm.flow_stages(replace=yes compress=yes copies=0 promote=yes); */
+/* data esm.flow_stages(compress=yes copies=0 promote=yes); */
 /*           set tempflows; */
 /*           elapsed_seconds=intck('sec',from_date,to_date); */
 /*           elapsed_minutes=elapsed_seconds/60.0; */
@@ -112,6 +113,7 @@ quit;
 /*           time=timepart(from_date); */
 /*           hour=hour(time); */
 /* run; */
+
 
 data server_statistics_a;
               set pgesm.esm_servers_stats_agg_min;
@@ -125,14 +127,16 @@ data server_statistics_a;
 run;
 
 proc sql;
-   create table  server_statistics as 
-   select a.*, b.esm_group
-   from server_statistics_a as a
-   join pgesm.esm_node as b on a.hostname = b.hostname;
+create table  server_statistics as 
+select a.*, b.esm_group
+from server_statistics_a as a
+join pgesm.esm_node as b on a.hostname = b.hostname
+;
 quit;
 
+
 data esm.server_statistics(compress=yes copies=0 promote=yes);
-   set server_statistics;
+set server_statistics;
 run;
 
 data esm.server_statistics_hour(compress=yes copies=0 promote=yes);
@@ -148,12 +152,15 @@ run;
 
 /*concurrent sessions*/
 proc sql;
+
     create table c1 as
         select time_stamp as ts, esm_type, esm_user, a.hostname, esm_group
         from pgesm.esm_process_stats_agg_hour as a 
                              join pgesm.esm_node as b on a.hostname = b.hostname
+
         where esm_type in ('WS', 'CMP', 'SPRE', 'Foundation', 'CS', 'Batch','CASW', 'CASC','GRID','python', 'R','STP','PWS')
               ;
+
               create table concurrent_sessions as
                   select ts, esm_type, esm_user, esm_group,
                              case
@@ -178,6 +185,7 @@ run;
 
 
 proc sql;
+
     create table tempsess as
         select a.*, b.esm_group
         from pgesm.esm_session as a
@@ -187,14 +195,15 @@ proc sql;
 quit;
 
 proc sql ;
-      create table temp1 as 
-           select 
-                  session_id,
-                   max(sys_cpu) as sys_cpu,
-                   max(user_cpu) as user_cpu
-                                          
-      from pgesm.esm_process_stats_agg_min as a
-          group by session_id
+
+              create table temp1 as 
+                             select 
+                                           session_id,
+                                           max(sys_cpu) as sys_cpu,
+                                           max(user_cpu) as user_cpu
+                                           
+                             from pgesm.esm_process_stats_agg_min as a
+                             group by session_id
 
               ;             
 
@@ -239,7 +248,7 @@ proc means data=esm.sessions;
    OUTPUT OUT=casuser.sessionsAVG;
 run;
 
-data esm.sessionsAVG(promote=yes compress=yes);
+data esm.sessionsAVG(promote=yes compress=yes copies=0);
    set casuser.sessionsAVG (where=(_stat_ = 'MEAN'));
               if kilobytes_read = . then kilobytes_read = 0;
               if kilobytes_written = . then kilobytes_written = 0;
@@ -264,7 +273,7 @@ data work.sessionsStartTime ;
    call symput('days',days);
 run;
 
-data esm.sessionsDateCat(promote=yes compress=yes);
+data esm.sessionsDateCat(promote=yes compress=yes copies=0);
    length dateCat $12 floorID floorM floorW 8.;
    set esm.sessionsAVG;
    drop floorID floorM floorW;
@@ -288,7 +297,7 @@ proc means data=esm.sessions;
    OUTPUT OUT=casuser.sessionsUSERAVG;
 run;
 
-data esm.sessionsUSERMAX(promote=yes compress=yes);
+data esm.sessionsUSERMAX(promote=yes compress=yes copies=0);
    set casuser.sessionsUSERAVG (where=(_stat_ = 'MAX'));
    if total_bytes_read = . then total_bytes_read = 0;
    if total_bytes_written = . then total_bytes_written = 0;
