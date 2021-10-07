@@ -169,11 +169,7 @@ data &test;
    product="&test"; 
    input line $100. ;
 
-/*   start: Stored Process Server Log */
    substr(line,1,100) = substr(line,&&noteStart.,&&noteStop.);
-/*   substr(line,1,100) = substr(line,noteStart,noteStop);*/
-/*   substr(line,1,100) = substr(line,61,39);*/
-/*   stop:  Stored Process Server Log */
 
    arg1=scan(line,1);
    arg2=scan(line,2);
