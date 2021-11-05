@@ -18,8 +18,7 @@ proc cas;
    table.addCaslib /
    caslib='sashdat'
    dataSource={srctype='DNFS'}
-   path="/path/to/save/cas/table" 
-   session=false;
+   path="/path/to/save/sashdat/file";
 quit;
 
 /* Binds all CAS librefs and default CASLIBs to your SAS client */
@@ -40,6 +39,5 @@ quit;
 
 proc casutil;
    save casdata='baseball' incaslib='casuser'
-   casout='baseball.sashdat' outcaslib='sashdat'
-   replace;
+   casout='baseball.sashdat' outcaslib='sashdat' replace;
 quit;
