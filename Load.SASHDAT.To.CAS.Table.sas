@@ -14,17 +14,13 @@ options USER = CASWORK;
 %put  &_sessref_;
 
 proc cas;
-   table.dropCaslib /
-   caslib='sas7bdat' quiet = true;
-run;
-   table.dropCaslib /
-   caslib='sashdat' quiet = true;
-run;
    table.addCaslib /
    caslib='sashdat'
    dataSource={srctype='DNFS'}
-   path="&datapath" ;
+   path="/path/to/save/cas/table" 
+   session=false;
 quit;
+
 /* Binds all CAS librefs and default CASLIBs to your SAS client */
 caslib _all_ assign;
 
