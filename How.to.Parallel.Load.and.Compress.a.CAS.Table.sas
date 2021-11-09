@@ -23,10 +23,6 @@ options msglevel=i;
 %let datapath=/path/to/sas7bdat;
 
 proc cas;
-   file log;
-   table.dropCaslib /
-   caslib='sas7bdat' quiet = true;
-run;
   addcaslib /
     datasource={srctype="path"}
     name="sas7bdat"
