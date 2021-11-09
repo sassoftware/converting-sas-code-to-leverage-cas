@@ -24,11 +24,6 @@ quit;
 /* Binds all CAS librefs and default CASLIBs to your SAS client */
 caslib _all_ assign;
 
-/* Load CAS table */
-proc casutil;
-   load casdata='baseball.sashdat' outcaslib='casuser' casout='baseball' replace;
-quit;
-
 /* Two ways to save a CAS table to SASHDAT */
 proc cas;
    table.save / caslib='sashdat'
