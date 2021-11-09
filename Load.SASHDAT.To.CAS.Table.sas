@@ -17,7 +17,7 @@ proc cas;
    table.addCaslib /
    caslib='sashdat'
    dataSource={srctype='DNFS'}
-   path="/path/to/save/cas/table" 
+   path="/path/to/saved/cas/table" 
 quit;
 
 /* Binds all CAS librefs and default CASLIBs to your SAS client */
