@@ -14,12 +14,6 @@ options USER = CASWORK;
 %put  &_sessref_;
 
 proc cas;
-   table.dropCaslib /
-   caslib='sas7bdat' quiet = true;
-run;
-   table.dropCaslib /
-   caslib='sashdat' quiet = true;
-run;
    table.addCaslib /
    caslib='sas7bdat'
    dataSource={srctype='path'}
