@@ -16,9 +16,6 @@ options USER = CASWORK;
 /* CASLIB for SAS7BDAT data sets */
 proc cas;
    table.dropCaslib /
-   caslib='sas7bdat' quiet = true;
-run;
-   table.dropCaslib /
    caslib='sashdat' quiet = true;
 run;
    table.addCaslib /
@@ -29,13 +26,6 @@ run;
 quit;
 /* Binds all CAS librefs and default CASLIBs to your SAS client */
 caslib _all_ assign;
-
-/* SAS7BDAT datasets will be loaded in parallel when the shared file system has been mounted on all CAS workers and
-all CAS workers have direct access to the SAS7BDAT file at the physical path /viyafiles/sasss1/data */
-proc casutil;
-   load casdata='baseball.sas7bdat' outcaslib='casuser' casout='baseball' replace
-   importoptions=(filetype='basesas' dtm='auto' debug='dmsglvli');
-run;
 
 /* Two ways to save a CAS table as a SAS7BDAT */
 proc cas;
