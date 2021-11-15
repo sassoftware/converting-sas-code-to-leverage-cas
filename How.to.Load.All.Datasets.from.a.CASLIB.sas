@@ -11,16 +11,10 @@ cas;
 %put  &_sessref_;
 
 proc cas; 
-   table.dropCaslib /
-   caslib='sas7bdat' quiet = true;
-run;
-   table.dropCaslib /
-   caslib='sashdat' quiet = true;
-run;
   table.addcaslib /
   caslib="sas7bdat"
   datasource={srctype="path"}
-  path="&datapath";
+  path="/path/to/sas7bdat";
   
   table.fileinfo result=ds / caslib="sas7bdat" includedirectories=false;
   datasets=ds.fileinfo;
