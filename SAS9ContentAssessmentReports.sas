@@ -3,10 +3,10 @@ Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
 SPDX-License-Identifier: Apache-2.0
 */
 /*
-Modify line 9 to point to your SAS 9 Content Assessment Code Check Data Mart
+Modify line 9 to point to your SAS 9 Content Assessment published code check data mart
 Modify line 13 encryptkey if encrypted or remove the encryptkey data sets option if not encrypted
 */
-%let s9cadm = C:\Users\sasss1\OneDrive - SAS\SAS 9 Content Assessmet Applications\v2021.1.6\codecheck;
+%let s9cadm = /path/to/S9CA/assessment/datamart/codecheck/;
 %put &s9cadm.;
 libname cc "&s9cadm.";
  
