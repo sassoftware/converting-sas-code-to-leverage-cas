@@ -205,6 +205,11 @@
 - Saving a CAS table as a parquet file
 - Loading a CAS table from a parquet file
 
+**SAS9ContentAssessmentReports.sas**
+- Compute Server 
+- SAS 9.4 workspace server
+- Batch process to generate punch lists reports of statements that need to be reviewed for migratiing SAS 9 code to SAS Viya
+- 
 **sasLogParser.sas**
 - Compute Server (SPRE).
 - SAS 9 workspace server.
