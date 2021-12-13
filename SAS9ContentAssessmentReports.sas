@@ -32,7 +32,7 @@ title;
 %macro engines;
 title "Access Engines";
 ods html5 file="&s9cadm.AccessEngines.html";
-proc print data=codechk_issues(where=(element="LIBNAME")) label;
+proc print data=codechk_issues(where=(element="LIBNAME" and engine not in ('BASE','V9'))) label;
    var pgm_name engine line n ;
    label n='Statement Number'
          element='Coding Element'
