@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 Modify line 9 to point to your SAS 9 Content Assessment Code Check Data Mart
 Modify line 13 encryptkey if encrypted or remove the encryptkey data sets option if not encrypted
 */
-%let s9cadm = /path/to/asssessment/datamart/codecheck;
+%let s9cadm = C:\Users\sasss1\OneDrive - SAS\SAS 9 Content Assessmet Applications\v2021.1.6\codecheck;
 %put &s9cadm.;
 libname cc "&s9cadm.";
  
@@ -17,6 +17,7 @@ run;
 
 %macro element(element=lIBNAME);
 title "&element.";
+ods html5 file="&s9cadm.&element..html";
 proc print data=codechk_issues(where=(element="&element")) label;
    var pgm_name line n ;
    label n='Statement Number'
@@ -24,11 +25,13 @@ proc print data=codechk_issues(where=(element="&element")) label;
 		 line='Statement'
          pgm_name='Program Path and Name';
 run;
+ods html5 close;
 title;
 %mend element;
 
 %macro engines;
 title "Access Engines";
+ods html5 file="&s9cadm.AccessEngines.html";
 proc print data=codechk_issues(where=(element="LIBNAME")) label;
    var pgm_name engine line n ;
    label n='Statement Number'
@@ -37,11 +40,13 @@ proc print data=codechk_issues(where=(element="LIBNAME")) label;
 		 line='Statement'
          pgm_name='Program Path and Name';
 run;
+ods html5 close;
 title;
 %mend engines;
 
 %macro issues;
 title "Issues for Review";
+ods html5 file="&s9cadm.IssuesForReview.html";
 proc print data=codechk_issues(where=(codeCheck_issue=1)) label;
    var pgm_name element engine line n ;
    label n='Statement Number'
@@ -50,12 +55,13 @@ proc print data=codechk_issues(where=(codeCheck_issue=1)) label;
 		 line='Statement'
          pgm_name='Program Path and Name';
 run;
+ods html5 close;
 title;
 %mend issues;
 
 %engines;
 %element(element=INFILE);
-%element(element=FILE);
+%element(element=FILENAME);
 %element(element=XCOMMAND);
 %element(element=%INCLUDE);
 %issues;
