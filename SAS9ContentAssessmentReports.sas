@@ -60,6 +60,7 @@ title;
 %mend issues;
 
 %engines;
+%element(element=LIBNAME);
 %element(element=INFILE);
 %element(element=FILENAME);
 %element(element=XCOMMAND);
