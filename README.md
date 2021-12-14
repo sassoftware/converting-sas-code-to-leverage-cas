@@ -207,7 +207,7 @@
 
 **SAS9ContentAssessmentReports.sas**
 - SAS 9.4 Workspace Server
-- Batch process to generate punch lists reports of statements that need to be reviewed for migratiing SAS 9 code to SAS Viya
+- Batch process to generate punch list reports of statements that need to be reviewed for migratiing SAS 9 code to SAS Viya
 
 **sasLogParser.sas**
 - Compute Server (SPRE).
