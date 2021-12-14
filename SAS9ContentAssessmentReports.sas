@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 /*
 Modify line 10 to point to your SAS 9 Content Assessment published code check data mart.
 Modify line 14 encryptkey if encrypted, or remove the encryptkey data sets option if not encrypted.
-Always run in batch. This is due to the size of the reports. 
+Always run in batch; this is due to the size of the reports. 
 */
 %let s9cadm = /path/to/S9CA/assessment/datamart/codecheck/;
 %put &s9cadm.;
