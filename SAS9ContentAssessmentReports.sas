@@ -10,7 +10,7 @@ Modify line 13 encryptkey if encrypted or remove the encryptkey data sets option
 %put &s9cadm.;
 libname cc "&s9cadm.";
  
-proc sort data=cc.codechk_issues (encryptkey='1D57933958C58006055CEC080DD5D2A9') 
+ proc sort data=cc.codechk_issues (encryptkey='1D57933958C58006055CEC080DD5D2A9') 
    out=work.codechk_issues (compress=binary);
    by  pgm_name engine element;
 run;
@@ -20,10 +20,10 @@ title "&element.";
 ods html5 file="&s9cadm.&element..html";
 proc print data=codechk_issues(where=(element="&element")) label;
    var pgm_name line n ;
-   label n='Statement Number'
+   label n='Statement Line Number'
          element='Coding Element'
-		 line='Statement'
-         pgm_name='Program Path and Name';
+	 	 line='Source Code Statement'
+         pgm_name='Full Program Name';
 run;
 ods html5 close;
 title;
@@ -34,11 +34,11 @@ title "Access Engines";
 ods html5 file="&s9cadm.AccessEngines.html";
 proc print data=codechk_issues(where=(element="LIBNAME" and engine not in ('BASE','V9'))) label;
    var pgm_name engine line n ;
-   label n='Statement Number'
+   label n='Statement Line Number'
          element='Coding Element'
 		 engine='Access Engine'
-		 line='Statement'
-         pgm_name='Program Path and Name';
+		 line='Source Code Statement'
+         pgm_name='Full Program Name';
 run;
 ods html5 close;
 title;
@@ -49,11 +49,11 @@ title "Issues for Review";
 ods html5 file="&s9cadm.IssuesForReview.html";
 proc print data=codechk_issues(where=(codeCheck_issue=1)) label;
    var pgm_name element engine line n ;
-   label n='Statement Number'
+   label n='Statement Line Number'
          element='Coding Element'
 		 engine='Access Engine'
-		 line='Statement'
-         pgm_name='Program Path and Name';
+		 line='Source Code Statement'
+         pgm_name='Full Program Name';
 run;
 ods html5 close;
 title;
