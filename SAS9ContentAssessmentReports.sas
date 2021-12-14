@@ -4,7 +4,7 @@ SPDX-License-Identifier: Apache-2.0
 */
 /*
 Modify line 11 to point to your SAS 9 Content Assessment published code check data mart.
-Modify line 15 encryptkey if encrypted, or remove the encryptkey data sets option if not encrypted.
+Modify line 15 the encryptkey if the data mart is encrypted, or remove the encryptkey data sets option if the data mart is not encrypted.
 Always run in batch; this is due to the size of the reports. 
 Reports are written to the path set on line 11.
 */
