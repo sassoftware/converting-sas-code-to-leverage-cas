@@ -3,9 +3,10 @@ Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
 SPDX-License-Identifier: Apache-2.0
 */
 /*
-Modify line 10 to point to your SAS 9 Content Assessment published code check data mart.
-Modify line 14 encryptkey if encrypted, or remove the encryptkey data sets option if not encrypted.
+Modify line 11 to point to your SAS 9 Content Assessment published code check data mart.
+Modify line 15 encryptkey if encrypted, or remove the encryptkey data sets option if not encrypted.
 Always run in batch; this is due to the size of the reports. 
+Reports are written to the path set on line 11.
 */
 %let s9cadm = /path/to/S9CA/assessment/datamart/codecheck/;
 %put &s9cadm.;
