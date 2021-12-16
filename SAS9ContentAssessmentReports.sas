@@ -18,15 +18,15 @@ libname cc "&s9cadm.";
    by  pgm_name engine element;
 run;
 
+
 %macro element(element=lIBNAME);
 title "&element.";
 ods html5 file="&s9cadm.&element..html";
-proc print data=codechk_issues(where=(element="&element")) label;
-   var pgm_name line n ;
-   label n='Statement Line Number'
-         element='Coding Element'
-	 	 line='Source Code Statement'
-         pgm_name='Full Program Name';
+proc report data=codechk_issues(where=(element="&element")) ;
+   column pgm_name line n;
+   define pgm_name / display 'Full Program Name' flow width=50  ;
+   define line / display 'Source Code Statement' flow width=50  ;
+   define N / display 'Statement Line Number' format=comma8. ;
 run;
 ods html5 close;
 title;
@@ -35,13 +35,12 @@ title;
 %macro engines;
 title "Access Engines";
 ods html5 file="&s9cadm.AccessEngines.html";
-proc print data=codechk_issues(where=(element="LIBNAME" and engine not in ('BASE','V9'))) label;
-   var pgm_name engine line n ;
-   label n='Statement Line Number'
-         element='Coding Element'
-		 engine='Access Engine'
-		 line='Source Code Statement'
-         pgm_name='Full Program Name';
+proc report data=codechk_issues(where=(element="LIBNAME")) ;
+   column pgm_name engine line n;
+   define pgm_name / display 'Full Program Name' flow width=50  ;
+   define engine / display 'Access Engine' width=25;
+   define line / display 'Source Code Statement' flow width=50  ;
+   define N / display 'Statement Line Number' format=comma8. ;
 run;
 ods html5 close;
 title;
@@ -50,13 +49,13 @@ title;
 %macro issues;
 title "Issues for Review";
 ods html5 file="&s9cadm.IssuesForReview.html";
-proc print data=codechk_issues(where=(codeCheck_issue=1)) label;
-   var pgm_name element engine line n ;
-   label n='Statement Line Number'
-         element='Coding Element'
-		 engine='Access Engine'
-		 line='Source Code Statement'
-         pgm_name='Full Program Name';
+proc report data=codechk_issues(where=(codeCheck_issue=1)) ;
+   column pgm_name element engine line n;
+   define pgm_name / display 'Full Program Name' flow width=50  ;
+   define element / display 'Coding Element' flow width=25;
+   define engine / display 'Access Engine' flow width=25;
+   define line / display 'Source Code Statement' flow width=50  ;
+   define N / display 'Statement Line Number' format=comma8. ;
 run;
 ods html5 close;
 title;
