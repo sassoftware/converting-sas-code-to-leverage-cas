@@ -13,11 +13,10 @@ Reports are written to the path set on line 11.
 %put &s9cadm.;
 libname cc "&s9cadm.";
  
- proc sort data=cc.codechk_issues (encrypt=AES encryptkey='1D57933958C58006055CEC080DD5D2A9') 
+proc sort data=cc.codechk_issues (encrypt=AES encryptkey='1D57933958C58006055CEC080DD5D2A9') 
    out=work.codechk_issues (compress=binary);
    by  pgm_name engine element;
 run;
-
 
 %macro element(element=lIBNAME);
 title "&element.";
