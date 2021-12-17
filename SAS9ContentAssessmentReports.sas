@@ -18,8 +18,6 @@ proc sort data=cc.codechk_issues (encrypt=AES encryptkey='1D57933958C58006055CEC
    by  pgm_name engine element;
 run;
 
-
-
 %macro element(element=lIBNAME);
 title "&element.";
 ods html5 file="&s9cadm.&element..html";
@@ -27,7 +25,7 @@ proc print data=codechk_issues(where=(element="&element")) ;
    var pgm_name line n;
    label pgm_name='Full Program Name'  
          line='Source Code Statement' 
-   		 n='Statement Line Number'; 
+   		    n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -38,11 +36,10 @@ title "Access Engines";
 ods html5 file="&s9cadm.AccessEngines.html";
 proc print data=codechk_issues(where=(element="LIBNAME")) ;
    var pgm_name engine line n;
-   
    label pgm_name='Full Program Name'  
          engine='Access Engine'  
          line='Source Code Statement' 
-   		 n='Statement Line Number'; 
+   		    n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -57,13 +54,13 @@ proc print data=codechk_issues(where=(codeCheck_issue=1)) ;
          element='Coding Element'   
          engine='Access Engine'  
          line='Source Code Statement' 
-   		 n='Statement Line Number'; 
+      		 n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
 %mend issues;
 
-option pagesize=max;
+options pagesize=max;
 
 %engines;
 %element(element=FILE);
@@ -73,4 +70,3 @@ option pagesize=max;
 %element(element=%INCLUDE);
 %element(element=XCOMMAND);
 %issues;
-
