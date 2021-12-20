@@ -14,18 +14,18 @@ Reports are written to the path set on line 11.
 libname cc "&s9cadm.";
  
 proc sort data=cc.codechk_issues (encrypt=AES encryptkey='1D57933958C58006055CEC080DD5D2A9') 
-   out=work.codechk_issues (compress=binary);
+   out=work.codechk_issues (compress=binary keep=pgm_name element engine line n codeCheck_issue);
    by  pgm_name engine element;
 run;
 
 %macro element(element=lIBNAME);
 title "&element.";
 ods html5 file="&s9cadm.&element..html";
-proc print data=codechk_issues(where=(element="&element")) ;
+proc print data=codechk_issues(where=(element="&element")) label;
    var pgm_name line n;
    label pgm_name='Full Program Name'  
          line='Source Code Statement' 
-   		    n='Statement Line Number'; 
+   		 n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -34,12 +34,13 @@ title;
 %macro engines;
 title "Access Engines";
 ods html5 file="&s9cadm.AccessEngines.html";
-proc print data=codechk_issues(where=(element="LIBNAME")) ;
+proc print data=codechk_issues(where=(element="LIBNAME")) label;
    var pgm_name engine line n;
+   
    label pgm_name='Full Program Name'  
          engine='Access Engine'  
          line='Source Code Statement' 
-   		    n='Statement Line Number'; 
+   		 n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -48,13 +49,13 @@ title;
 %macro issues;
 title "Issues for Review";
 ods html5 file="&s9cadm.IssuesForReview.html";
-proc print data=codechk_issues(where=(codeCheck_issue=1)) ;
+proc print data=codechk_issues(where=(codeCheck_issue=1)) label;
    var pgm_name element engine line n;
    label pgm_name='Full Program Name'
          element='Coding Element'   
          engine='Access Engine'  
          line='Source Code Statement' 
-      		 n='Statement Line Number'; 
+   		 n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -63,10 +64,11 @@ title;
 options pagesize=max;
 
 %engines;
+
 %element(element=FILE);
 %element(element=FILENAME);
 %element(element=INFILE);
 %element(element=LIBNAME);
 %element(element=%INCLUDE);
 %element(element=XCOMMAND);
-%issues;
+%issues;   
