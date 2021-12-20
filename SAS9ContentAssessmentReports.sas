@@ -22,10 +22,10 @@ run;
 title "&element.";
 ods html5 file="&s9cadm.&element..html";
 proc print data=codechk_issues(where=(element="&element")) label;
-   var pgm_name line n;
+   var   n line pgm_name;
    label pgm_name='Full Program Name'  
          line='Source Code Statement' 
-   		 n='Statement Line Number'; 
+   		    n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -35,12 +35,11 @@ title;
 title "Access Engines";
 ods html5 file="&s9cadm.AccessEngines.html";
 proc print data=codechk_issues(where=(element="LIBNAME")) label;
-   var pgm_name engine line n;
-   
+   var  n engine line pgm_name;
    label pgm_name='Full Program Name'  
          engine='Access Engine'  
          line='Source Code Statement' 
-   		 n='Statement Line Number'; 
+      		 n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -50,12 +49,12 @@ title;
 title "Issues for Review";
 ods html5 file="&s9cadm.IssuesForReview.html";
 proc print data=codechk_issues(where=(codeCheck_issue=1)) label;
-   var pgm_name element engine line n;
+   var  n element engine line pgm_name;
    label pgm_name='Full Program Name'
          element='Coding Element'   
          engine='Access Engine'  
          line='Source Code Statement' 
-   		 n='Statement Line Number'; 
+      		 n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -71,4 +70,4 @@ options pagesize=max;
 %element(element=LIBNAME);
 %element(element=%INCLUDE);
 %element(element=XCOMMAND);
-%issues;   
+%issues;
