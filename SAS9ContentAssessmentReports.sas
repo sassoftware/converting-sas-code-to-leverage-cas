@@ -25,7 +25,7 @@ proc print data=codechk_issues(where=(element="&element")) label;
    var   n line pgm_name;
    label pgm_name='Full Program Name'  
          line='Source Code Statement' 
-   		    n='Statement Line Number'; 
+         n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -39,7 +39,7 @@ proc print data=codechk_issues(where=(element="LIBNAME")) label;
    label pgm_name='Full Program Name'  
          engine='Access Engine'  
          line='Source Code Statement' 
-      		 n='Statement Line Number'; 
+         n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
@@ -54,7 +54,7 @@ proc print data=codechk_issues(where=(codeCheck_issue=1)) label;
          element='Coding Element'   
          engine='Access Engine'  
          line='Source Code Statement' 
-      		 n='Statement Line Number'; 
+         n='Statement Line Number'; 
 run;
 ods html5 close;
 title;
