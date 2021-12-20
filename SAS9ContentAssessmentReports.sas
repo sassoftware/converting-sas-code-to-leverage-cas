@@ -60,10 +60,9 @@ ods html5 close;
 title;
 %mend issues;
 
-options pagesize=max;
+/* options pagesize=max; */
 
 %engines;
-
 %element(element=FILE);
 %element(element=FILENAME);
 %element(element=INFILE);
