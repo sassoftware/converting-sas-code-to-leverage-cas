@@ -203,6 +203,7 @@
 **esmCodeForUploadToSAS.tgz**
 - Download file to a directory 
 - tar xvzf esmCodeForUploadToSAS.tgz
+- Instructions in readme.txt file
 
 **parquet.sas**
 - CAS enabled.
