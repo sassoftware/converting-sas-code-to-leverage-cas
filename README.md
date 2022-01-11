@@ -200,6 +200,10 @@
 - Macro that adds two caslibs, drops an exsisting promoted CAS table, parallel lifts source into CAS, promotes the new CAS table
 - and saves the promoted CAS table as a SASHDAT.
 
+**esmCodeForUploadToSAS.tgz**
+- Download file to a directory 
+- tar xvzf esmCodeForUploadToSAS.tgz
+
 **parquet.sas**
 - CAS enabled.
 - Saving a CAS table as a parquet file
