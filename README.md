@@ -205,6 +205,11 @@
 - tar xvzf esmCodeForUploadToSAS.tgz
 - Instructions in readme.txt file
 
+**esmCodeForUploadToSAS.zip**
+- Download file to a directory 
+- unzip esmCodeForUploadToSAS.zip
+- Instructions in readme.txt file
+
 **parquet.sas**
 - CAS enabled.
 - Saving a CAS table as a parquet file
