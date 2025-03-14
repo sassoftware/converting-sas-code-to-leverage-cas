@@ -1,3 +1,5 @@
+This project is no longer under active development and was archived 2025-03-14.
+
 # converting-sas-code-to-leverage-cas 
 ##  Best Practices for Converting SAS Code to Leverage CAS
 ### Coding examples can be run **as is** with SAS Viya 3.5+.
